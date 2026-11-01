@@ -7,6 +7,7 @@ import Humor from "./pages/Humor";
 import Diario from "./pages/Diario";
 import Evolucao from "./pages/Evolucao";
 import Favoritos from "./pages/Favoritos";
+import Entrar from "./pages/Entrar";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/diario" element={<Diario />} />
           <Route path="/evolucao" element={<Evolucao />} />
           <Route path="/favoritos" element={<Favoritos />} />
+          <Route path="/entrar" element={<Entrar />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </Layout>

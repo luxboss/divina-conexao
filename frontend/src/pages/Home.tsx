@@ -34,6 +34,7 @@ export default function Home() {
       <div className="acoes-topo">
         <Link to="/diario" className="botao-secundario largo">Acessar meu diário</Link>
         <Link to="/evolucao" className="botao-secundario largo">Minha evolução</Link>
+        <Link to="/entrar" className="botao-secundario largo">Minha conta</Link>
       </div>
 
       <p className="data-hoje">{dataTexto}</p>

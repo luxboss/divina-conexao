@@ -12,6 +12,17 @@ export function chaveDoDia(data: Date): string {
   return `${ano}-${mes}-${dia}`;
 }
 
+/** Dia do calendário de Brasília (AAAA-MM-DD), independente do fuso do aparelho. */
+export function chaveDoDiaBrasilia(data: Date): string {
+  const partes = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Sao_Paulo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).format(data);
+  return partes; // en-CA já formata como AAAA-MM-DD
+}
+
 /** Hash simples e estável de uma string (não muda entre execuções). */
 function hashDeTexto(texto: string): number {
   let h = 0;
@@ -30,6 +41,6 @@ export function versiculoDoDia(
     versiculosValidos(t).map((v) => ({ ...v, tema: t.tema }))
   );
   if (todos.length === 0) return null;
-  const indice = hashDeTexto(chaveDoDia(data)) % todos.length;
+  const indice = hashDeTexto(chaveDoDiaBrasilia(data)) % todos.length;
   return todos[indice];
 }

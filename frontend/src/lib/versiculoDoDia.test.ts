@@ -54,3 +54,18 @@ describe("versiculoDoDia", () => {
     expect(versiculoDoDia(vazio, new Date(2026, 0, 1))).toBeNull();
   });
 });
+
+describe("versículo do dia pelo horário de Brasília", () => {
+  it("muda à meia-noite de Brasília, não à meia-noite UTC", () => {
+    // 2026-10-31 02:30 UTC = 2026-10-30 23:30 em Brasília (ainda é o dia 30)
+    const antesDaMeiaNoite = versiculoDoDia(banco, new Date("2026-10-31T02:30:00Z"));
+    const ondeFicouODia30 = versiculoDoDia(banco, new Date("2026-10-30T15:00:00Z"));
+    expect(antesDaMeiaNoite).toEqual(ondeFicouODia30);
+  });
+
+  it("o dia seguinte começa à meia-noite de Brasília (03:00 UTC)", () => {
+    const dia30 = versiculoDoDia(banco, new Date("2026-10-30T15:00:00Z"));
+    const dia31 = versiculoDoDia(banco, new Date("2026-10-31T03:00:00Z"));
+    expect(dia31).not.toEqual(dia30);
+  });
+});

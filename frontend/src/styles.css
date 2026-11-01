@@ -526,3 +526,16 @@ h1, h2, .titulo-tema, .cabecalho h1 {
 .cartao-tema:hover, .cartao-tema:focus-visible, .cartao-dia:hover {
   box-shadow: 0 0 16px rgba(250, 204, 21, 0.45);
 }
+
+/* Campos de texto do cadastro e login */
+.campo-texto {
+  width: 100%;
+  padding: 12px 14px;
+  font: inherit; font-size: 16px; color: var(--texto);
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(250, 204, 21, 0.6);
+  border-radius: 999px;
+}
+.campo-texto:focus-visible { outline: 2px solid #facc15; outline-offset: 2px; }
+.acoes-topo { grid-template-columns: 1fr 1fr; }
+.acoes-topo > a:last-child { grid-column: 1 / -1; }
