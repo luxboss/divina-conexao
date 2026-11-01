@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
-import { decidirVisibilidade } from "../lib/rolagem";
+
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Icone from "./Icone";
 import { useSessao } from "../hooks/useSessao";
@@ -20,7 +20,6 @@ export default function Layout({ children }: { children: ReactNode }) {
     if (window.history.length > 1) navegar(-1);
     else navegar("/");
   }
-  const [barraVisivel, setBarraVisivel] = useState(true);
 
   // Ao trocar de aba, a página começa sempre no topo (e não na posição de rolagem anterior).
   useEffect(() => {
@@ -29,23 +28,6 @@ export default function Layout({ children }: { children: ReactNode }) {
   const { sessao, carregando } = useSessao();
   // A barra só aparece para quem já entrou na conta.
   const mostrarBarra = !carregando && !!sessao;
-
-  useEffect(() => {
-    let anterior = window.scrollY;
-    let ticando = false;
-    const aoRolar = () => {
-      if (ticando) return;
-      ticando = true;
-      requestAnimationFrame(() => {
-        const atual = window.scrollY;
-        setBarraVisivel((visivel) => decidirVisibilidade({ anterior, atual, visivel }));
-        anterior = atual;
-        ticando = false;
-      });
-    };
-    window.addEventListener("scroll", aoRolar, { passive: true });
-    return () => window.removeEventListener("scroll", aoRolar);
-  }, []);
 
   return (
     <div className="app">
@@ -56,7 +38,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         {children}
       </main>
       {mostrarBarra && (
-      <nav className={barraVisivel ? "barra-inferior barra-central" : "barra-inferior barra-central oculta"} aria-label="Navegação principal">
+      <nav className="barra-inferior barra-central" aria-label="Navegação principal">
         {ITENS.map((item) => {
           const ativo = item.ativo(pathname);
           return (
