@@ -1,5 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
-
+import { ReactNode, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Icone from "./Icone";
 import { useSessao } from "../hooks/useSessao";
