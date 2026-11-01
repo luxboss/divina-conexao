@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="description" content="Escolha um tema e receba um versículo bíblico para o seu dia." />
     <meta name="theme-color" content="#0B1020" />
+    <!-- Política de conteúdo: só o próprio site, o Supabase e as imagens locais podem carregar -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://nrwkuoyesiyfnzsnvzij.supabase.co wss://nrwkuoyesiyfnzsnvzij.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
+    />
+    <!-- Pede que buscadores e robôs de IA não usem o conteúdo e as imagens para treinamento -->
+    <meta name="robots" content="noindex, nofollow, noai, noimageai" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="icon" type="image/svg+xml" href="./icons/icon.svg" />
     <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
     <title>Divina Conexão</title>
