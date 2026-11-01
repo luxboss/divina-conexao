@@ -608,3 +608,14 @@ body { overflow-x: hidden; }
 
 /* Largura padrão do conteúdo (no computador e no celular): restaura o limite que a regra de rolagem tinha removido */
 .conteudo { max-width: 560px; width: 100%; margin: 0 auto; }
+
+/* Lista de aparelhos conectados (tela Minha conta) */
+.lista-aparelhos { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.linha-aparelho {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 12px 16px; border-radius: 999px;
+  background: rgba(11, 16, 32, 0.66);
+  border: 1px solid rgba(250, 204, 21, 0.6);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+}
+.linha-aparelho .botao-secundario { flex-shrink: 0; }
