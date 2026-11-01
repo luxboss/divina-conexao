@@ -14,7 +14,8 @@ import Musicas from "./pages/Musicas";
 
 // Marca que esta abertura do app já foi tratada. Some ao fechar o app ou a aba,
 // então cada vez que o app é aberto (pelo ícone ou pelo link) a tela de entrar aparece.
-const CHAVE_ABERTURA = "divina-conexao:abertura-feita";
+// Fica só na memória da página: zera a cada abertura do app (inclusive ao reabrir pela tela inicial).
+let aberturaTratada = false;
 
 /**
  * A cada abertura do app, a pessoa começa na tela de Entrar / Criar conta.
@@ -27,8 +28,8 @@ function IrParaContaAoAbrir() {
 
   useEffect(() => {
     if (carregando) return;
-    if (sessionStorage.getItem(CHAVE_ABERTURA)) return;
-    sessionStorage.setItem(CHAVE_ABERTURA, "1");
+    if (aberturaTratada) return;
+    aberturaTratada = true;
 
     const veioDeRecuperacao = recuperando || window.location.hash.includes("type=recovery");
     if (veioDeRecuperacao) {
