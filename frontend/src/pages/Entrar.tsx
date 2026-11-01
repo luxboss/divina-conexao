@@ -5,6 +5,14 @@ import { validarCadastro, validarEmail, validarNovaSenha } from "../lib/auth";
 import { Aparelho, listarAparelhos, registrarAparelhoAtual, removerAparelho } from "../lib/aparelhos";
 import { LIMITE_APARELHOS } from "../lib/dispositivo";
 
+/** Espera a resposta por no máximo 8 segundos; depois disso, falha em vez de ficar travado. */
+function comLimiteDeTempo<T>(promessa: Promise<T>, ms = 8000): Promise<T> {
+  return Promise.race([
+    promessa,
+    new Promise<T>((_, rejeitar) => setTimeout(() => rejeitar(new Error("tempo esgotado")), ms))
+  ]);
+}
+
 function IconeOlho({ aberto }: { aberto: boolean }) {
   return (
     <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
@@ -65,7 +73,7 @@ function ContaLogada({ email, sair }: { email: string; sair: () => Promise<void>
   const verificar = useCallback(async () => {
     let resultado;
     try {
-      resultado = await registrarAparelhoAtual();
+      resultado = await comLimiteDeTempo(registrarAparelhoAtual());
     } catch {
       setEstado("ok");
       setErro("Não foi possível verificar este aparelho agora. Tente atualizar a página.");
@@ -79,7 +87,11 @@ function ContaLogada({ email, sair }: { email: string; sair: () => Promise<void>
     } else {
       setErro(resultado.erro);
     }
-    setAparelhos(await listarAparelhos());
+    try {
+      setAparelhos(await comLimiteDeTempo(listarAparelhos()));
+    } catch {
+      setAparelhos([]);
+    }
   }, []);
 
   useEffect(() => {
