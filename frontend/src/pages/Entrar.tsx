@@ -63,7 +63,14 @@ function ContaLogada({ email, sair }: { email: string; sair: () => Promise<void>
   const [erro, setErro] = useState<string | null>(null);
 
   const verificar = useCallback(async () => {
-    const resultado = await registrarAparelhoAtual();
+    let resultado;
+    try {
+      resultado = await registrarAparelhoAtual();
+    } catch {
+      setEstado("ok");
+      setErro("Não foi possível verificar este aparelho agora. Tente atualizar a página.");
+      return;
+    }
     if (resultado.ok) {
       setEstado("ok");
       setErro(null);
