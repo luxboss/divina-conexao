@@ -577,3 +577,8 @@ h1, h2, .titulo-tema, .cabecalho h1 {
 
 /* Tela de entrar: duas abas centralizadas (no celular e no desktop) */
 .abas.abas-duas { grid-template-columns: 1fr 1fr; width: 100%; max-width: 360px; margin: 0 auto; }
+
+/* Nada pode rolar para os lados no celular: o zoom das fotos e qualquer excesso ficam cortados */
+html, body { overflow-x: hidden; max-width: 100%; }
+.app, .conteudo, .pagina { overflow-x: clip; max-width: 100%; }
+.foto-hero, .foto-banner, .foto-faixa { max-width: 100%; }
