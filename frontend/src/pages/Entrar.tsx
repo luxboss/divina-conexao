@@ -235,12 +235,13 @@ export default function Entrar() {
   return (
     <section className="pagina">
       <img
-        className="foto-hero"
+        className="foto-hero entrar-foto"
         src="./imagens/hero-maria-azul.jpg"
         alt="Vitral azul com a Virgem Maria segurando o Menino Jesus"
         loading="eager"
         decoding="async"
       />
+      <p className="marca-desktop" aria-hidden="true">Divina Conexão</p>
       <header className="cabecalho">
         <h1>{modo === "entrar" ? "Entrar" : "Criar conta"}</h1>
         <p className="subtitulo">Seu diário e favoritos ficam guardados na sua conta</p>

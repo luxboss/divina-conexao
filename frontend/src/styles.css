@@ -557,3 +557,20 @@ h1, h2, .titulo-tema, .cabecalho h1 {
   font: inherit; font-size: 15px; cursor: pointer; padding: 6px; align-self: center;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
 }
+
+/* Lista de músicas de missa (abre no Spotify) */
+.lista-musicas { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.linha-musica { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-radius: 999px; background: rgba(11, 16, 32, 0.66); border: 1px solid rgba(250, 204, 21, 0.7); box-shadow: 0 0 12px rgba(250, 204, 21, 0.25); font-weight: 600; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85); }
+.linha-musica:hover, .linha-musica:focus-visible { box-shadow: 0 0 16px rgba(250, 204, 21, 0.45); outline: none; }
+
+/* Tela de entrar: abas centralizadas e, no desktop, o nome do app no lugar da imagem */
+.abas { margin-left: auto; margin-right: auto; max-width: 420px; width: 100%; }
+.marca-desktop { display: none; }
+@media (min-width: 768px) {
+  .entrar-foto { display: none; }
+  .marca-desktop {
+    display: block; margin: 24px 0 0; text-align: center;
+    font-size: 40px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9), 0 0 16px rgba(0, 0, 0, 0.6);
+  }
+}

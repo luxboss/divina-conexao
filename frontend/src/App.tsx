@@ -10,6 +10,7 @@ import Diario from "./pages/Diario";
 import Evolucao from "./pages/Evolucao";
 import Favoritos from "./pages/Favoritos";
 import Entrar from "./pages/Entrar";
+import Musicas from "./pages/Musicas";
 
 // Marca que esta abertura do app já foi tratada. Some ao fechar o app ou a aba,
 // então cada vez que o app é aberto (pelo ícone ou pelo link) a tela de entrar aparece.
@@ -56,6 +57,7 @@ export default function App() {
           <Route path="/evolucao" element={<Evolucao />} />
           <Route path="/favoritos" element={<Favoritos />} />
           <Route path="/entrar" element={<Entrar />} />
+          <Route path="/musicas" element={<Musicas />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </Layout>

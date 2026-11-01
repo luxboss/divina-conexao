@@ -78,6 +78,7 @@ export default function Home() {
       </section>
 
       <Link to="/temas" className="botao-primario largo">Explorar temas</Link>
+      <Link to="/musicas" className="botao-secundario largo">Músicas de missa</Link>
     </section>
   );
 }
