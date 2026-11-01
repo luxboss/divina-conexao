@@ -1,0 +1,528 @@
+/* Visual parecido com o app de referência: gradiente azul → roxo, cartões translúcidos,
+   botão principal amarelo-laranja, barra inferior. Textos em branco. */
+
+:root {
+  --azul: #1e3a8a;
+  --roxo: #6b21a8;
+  --escuro: #0b1020;
+  --cartao: rgba(255, 255, 255, 0.08);
+  --cartao-hover: rgba(255, 255, 255, 0.14);
+  --borda: rgba(255, 255, 255, 0.14);
+  --texto: #ffffff;
+  --sub: rgba(255, 255, 255, 0.88);
+  --destaque: linear-gradient(135deg, #facc15, #f97316);
+  --raio: 16px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; margin: 0; }
+
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--texto);
+  background: linear-gradient(160deg, var(--azul) 0%, var(--roxo) 55%, #2e1065 100%) fixed;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.app {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: calc(84px + env(safe-area-inset-bottom));
+}
+
+.conteudo {
+  flex: 1;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.pagina { display: flex; flex-direction: column; gap: 20px; }
+
+/* Cabeçalho */
+.cabecalho { text-align: center; padding-top: 12px; }
+.cabecalho h1 { margin: 10px 0 4px; font-size: clamp(40px, 8.4vw, 96px); font-weight: 700; line-height: 1; letter-spacing: -0.03em; }
+.logo {
+  width: 64px; height: 64px; margin: 0 auto;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--cartao);
+  border: 1px solid var(--borda);
+  font-size: 28px;
+  color: #facc15;
+}
+.subtitulo { margin: 0; color: var(--sub); font-size: 16px; }
+.pergunta { font-size: 18px; font-weight: 600; text-align: center; margin: 8px 0 0; }
+
+/* Grade de temas */
+.grade-temas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.cartao-tema {
+  display: grid; place-items: center;
+  min-height: 76px;
+  padding: 14px 10px;
+  text-align: center;
+  font-weight: 600;
+  background: var(--cartao);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.cartao-tema:hover, .cartao-tema:focus-visible { background: var(--cartao-hover); transform: translateY(-1px); outline: none; }
+
+/* Topo da tela de tema */
+.topo { display: flex; align-items: center; gap: 12px; }
+.titulo-tema { margin: 0; font-size: 22px; font-weight: 700; }
+.botao-voltar {
+  width: 40px; height: 40px; display: grid; place-items: center;
+  border-radius: 50%; background: var(--cartao); border: 1px solid var(--borda);
+  font-size: 18px;
+}
+
+/* Versículo */
+.cartao-versiculo {
+  padding: 28px 22px;
+  background: var(--cartao);
+  border: 1px solid var(--borda);
+  border-radius: 22px;
+  text-align: center;
+  backdrop-filter: blur(6px);
+}
+.texto-versiculo {
+  margin: 0 0 16px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+  line-height: 1.65;
+}
+.texto-versiculo.pequeno { font-size: 16px; text-align: left; }
+.referencia { margin: 0; color: #facc15; font-weight: 600; }
+.tema-pequeno { color: var(--sub); font-weight: 500; }
+
+/* Botões */
+.acoes { display: flex; flex-direction: column; gap: 10px; }
+.botao-primario, .botao-secundario {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 14px 18px;
+  border-radius: 14px;
+  font: inherit; font-weight: 600; font-size: 15px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.botao-primario { background: var(--destaque); color: #1f1300; }
+.botao-secundario { background: var(--cartao); color: var(--texto); border-color: var(--borda); }
+.botao-secundario[aria-pressed="true"] { border-color: #facc15; color: #facc15; }
+.botao-secundario.pequeno, .botao-primario.pequeno { padding: 8px 14px; font-size: 13px; align-self: flex-start; }
+.botao-primario:focus-visible, .botao-secundario:focus-visible, .botao-voltar:focus-visible {
+  outline: 2px solid #facc15; outline-offset: 2px;
+}
+
+/* Favoritos */
+.lista-favoritos { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.item-favorito {
+  padding: 16px;
+  background: var(--cartao);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.cartao-vazio {
+  padding: 28px 20px;
+  background: var(--cartao);
+  border: 1px dashed var(--borda);
+  border-radius: 22px;
+  text-align: center;
+  display: flex; flex-direction: column; gap: 14px; align-items: center;
+  color: var(--sub);
+}
+
+/* Barra inferior */
+.barra-inferior {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  display: flex; justify-content: space-around; align-items: center;
+  height: calc(68px + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+.barra-inferior a {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  font-size: 12px; color: var(--sub);
+  padding: 8px 20px;
+  border-radius: 12px;
+}
+.barra-inferior a.ativo { color: #facc15; background: var(--cartao); }
+
+/* Ícones, fotos e créditos */
+.icone { width: 1.1em; height: 1.1em; vertical-align: -0.2em; }
+.logo .icone { width: 30px; height: 30px; }
+.foto-hero, .foto-banner {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 22px;
+}
+.foto-hero { animation: respirar 18s ease-in-out infinite alternate; transform-origin: center; }
+.foto-banner { height: 140px; }
+.foto-faixa { display: block; width: 100%; height: 150px; object-fit: cover; border-radius: 22px; }
+.foto-faixa.alta { height: 220px; object-position: top; }
+.creditos { font-size: 14px; color: var(--sub); text-align: center; padding-top: 8px; }
+.creditos a { color: var(--sub); text-decoration: underline; }
+
+/* Movimento: entrada por seção e resposta ao toque; reduzido se o aparelho pedir */
+@keyframes subir {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes respirar {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+.pagina > *, .grade-temas > *, .lista-favoritos > li {
+  animation: subir 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.pagina > *:nth-child(2) { animation-delay: 0.08s; }
+.pagina > *:nth-child(3) { animation-delay: 0.16s; }
+.pagina > *:nth-child(4) { animation-delay: 0.24s; }
+.pagina > *:nth-child(n+5) { animation-delay: 0.3s; }
+.grade-temas > *:nth-child(1) { animation-delay: 0.1s; }
+.grade-temas > *:nth-child(2) { animation-delay: 0.16s; }
+.grade-temas > *:nth-child(3) { animation-delay: 0.22s; }
+.grade-temas > *:nth-child(4) { animation-delay: 0.28s; }
+.grade-temas > *:nth-child(5) { animation-delay: 0.34s; }
+.grade-temas > *:nth-child(6) { animation-delay: 0.4s; }
+.grade-temas > *:nth-child(n+7) { animation-delay: 0.46s; }
+.lista-favoritos > li:nth-child(n+2) { animation-delay: 0.12s; }
+button, a.botao-primario, a.botao-secundario, .cartao-tema, .cartao-dia {
+  transition: transform 0.12s ease, background 0.15s ease;
+}
+button:active, a.botao-primario:active, a.botao-secundario:active, .cartao-tema:active, .cartao-dia:active {
+  transform: scale(0.97);
+}
+
+/* Versículo do dia */
+.cartao-dia {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 20px;
+  background: var(--cartao);
+  border: 1px solid #facc15;
+  border-radius: 22px;
+  transition: background 0.15s ease;
+}
+.cartao-dia:hover, .cartao-dia:focus-visible { background: var(--cartao-hover); outline: none; }
+.rotulo {
+  font-size: 14px; font-weight: 600; color: #facc15;
+}
+
+/* Compartilhar */
+.compartilhar { display: flex; flex-direction: column; gap: 10px; }
+
+/* Favoritos: backup e anotações */
+.backup {
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  padding: 14px;
+  background: var(--cartao);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+}
+.backup .dica { width: 100%; margin: 0; color: var(--sub); font-size: 14px; }
+.rotulo-campo { font-size: 14px; color: var(--sub); }
+.campo-nota {
+  width: 100%;
+  padding: 10px 12px;
+  font: inherit; font-size: 14px; color: var(--texto);
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  resize: vertical;
+}
+.campo-nota:focus-visible { outline: 2px solid #facc15; outline-offset: 2px; }
+.linha-acoes { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.linha-acoes .botao-primario:disabled { opacity: 0.5; cursor: default; }
+.confirmacao { color: #86efac; font-size: 14px; }
+.aviso-ok { width: 100%; margin: 0; color: #86efac; font-size: 14px; }
+.aviso-erro { width: 100%; margin: 0; color: #fca5a5; font-size: 14px; }
+
+/* Início: humores, ações e características */
+.acoes-topo { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.largo { width: 100%; text-align: center; }
+.data-hoje { margin: 0; text-align: center; color: var(--sub); text-transform: capitalize; font-size: 16px; }
+.grade-humores { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.cartao-humor {
+  display: grid; place-items: center; min-height: 84px;
+  background: var(--cartao);
+  border-radius: var(--raio);
+  font-weight: 600; font-size: 17px;
+  transition: background 0.15s ease, transform 0.12s ease;
+}
+.cartao-humor:hover, .cartao-humor:focus-visible { background: var(--cartao-hover); outline: none; }
+.centro { text-align: center; }
+.esquerda { text-align: left; }
+.caracteristicas {
+  background: var(--cartao);
+  border-radius: 22px;
+  padding: 20px;
+}
+.caracteristicas ul { margin: 12px 0 0; padding-left: 18px; line-height: 1.8; }
+.caracteristicas .pergunta { margin: 0; text-align: left; }
+
+/* Banner de instalação */
+.banner-instalar {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 16px;
+  background: var(--destaque-azul, rgba(59, 130, 246, 0.35));
+  border-radius: 18px;
+}
+.banner-texto { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 200px; }
+.banner-texto span { font-size: 16px; }
+.banner-texto .dica { color: var(--sub); }
+
+/* Diário e evolução */
+.cartao-diario {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 20px;
+  background: var(--cartao);
+  border-radius: 22px;
+}
+.abas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; background: var(--cartao); padding: 6px; border-radius: 14px; }
+.aba { background: transparent; color: var(--sub); border: 0; border-radius: 10px; padding: 10px; font: inherit; font-weight: 600; cursor: pointer; }
+.aba.ativa { background: var(--destaque); color: #1f1300; }
+.resumo-evolucao { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center; }
+.resumo-evolucao > div { background: var(--cartao); border-radius: var(--raio); padding: 14px 8px; display: flex; flex-direction: column; gap: 4px; }
+.resumo-evolucao strong { font-size: 26px; color: #facc15; }
+.resumo-evolucao span { font-size: 13px; color: var(--sub); }
+.grafico { display: flex; align-items: flex-end; gap: 6px; height: 220px; padding: 16px; background: var(--cartao); border-radius: 22px; }
+.coluna { flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 6px; }
+.barra { width: 100%; min-height: 4px; background: var(--destaque); border-radius: 8px 8px 4px 4px; }
+.rotulo-barra { font-size: 12px; color: var(--sub); }
+
+/* Telas largas */
+@media (min-width: 640px) {
+  .grade-temas { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Emojis animados dos humores */
+.cartao-humor { flex-direction: column; gap: 6px; }
+.emoji-humor { font-size: 40px; line-height: 1; display: inline-block; animation: balancar 3s ease-in-out infinite; }
+.cartao-humor:nth-child(2n) .emoji-humor { animation-delay: 0.5s; }
+.cartao-humor:nth-child(3n) .emoji-humor { animation-delay: 1s; }
+@keyframes balancar {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(-6deg); }
+}
+
+/* Fundo fixo com a imagem de vitral e uma camada suave para a leitura.
+   Usa um elemento fixo (não background-attachment), que funciona também no iPhone. */
+body {
+  background-color: var(--escuro);
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(11, 16, 32, 0.45) 0%, rgba(11, 16, 32, 0.7) 100%),
+    url("./assets/fundo-ressurreicao.jpg") center top / cover no-repeat;
+}
+
+/* Barra inferior: some ao descer a página e volta ao subir */
+.barra-inferior { transition: transform 0.25s ease; }
+.barra-inferior.oculta { transform: translateY(110%); }
+
+/* Contraste dos textos sobre o fundo de vitral */
+.cartao-humor, .cartao-tema, .botao-primario, .botao-secundario, .cartao-dia, .cartao-versiculo,
+.caracteristicas, .cartao-diario, .item-favorito, .cartao-vazio, .resumo-evolucao > div, .grafico {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+.botao-primario { text-shadow: none; }
+.referencia, .rotulo { text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75); }
+
+/* Mais contraste: cartões escuros por baixo dos textos que ficam sobre o vitral */
+.cartao-humor, .cartao-tema {
+  background: rgba(11, 16, 32, 0.6);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.6);
+}
+.cartao-humor:hover, .cartao-humor:focus-visible, .cartao-tema:hover, .cartao-tema:focus-visible {
+  background: rgba(11, 16, 32, 0.75);
+}
+.subtitulo, .centro, .pergunta, .data-hoje, .creditos {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.7);
+}
+.emoji-humor { filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)); }
+
+/* Contraste em todas as telas: superfícies escuras e sombra nos títulos e textos */
+.cartao-versiculo, .cartao-dia, .item-favorito, .cartao-vazio, .cartao-diario, .caracteristicas,
+.resumo-evolucao > div, .grafico, .abas, .backup, .banner-instalar {
+  background: rgba(11, 16, 32, 0.62);
+}
+.cartao-versiculo, .cartao-dia, .item-favorito, .cartao-vazio, .cartao-diario, .caracteristicas,
+.backup, .resumo-evolucao > div, .grafico, .abas, .banner-instalar, .texto-versiculo, .referencia, .campo-nota {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85), 0 0 10px rgba(0, 0, 0, 0.5);
+}
+h1, h2, .titulo-tema, .cabecalho h1 {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9), 0 0 14px rgba(0, 0, 0, 0.6);
+}
+.campo-nota { background: rgba(0, 0, 0, 0.45); }
+.aba { color: rgba(255, 255, 255, 0.92); text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85); }
+.aba.ativa { color: #1f1300; text-shadow: none; }
+.barra-inferior { background: rgba(11, 16, 32, 0.92); }
+.barra-inferior a { color: rgba(255, 255, 255, 0.9); text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); }
+.barra-inferior a.ativo { color: #facc15; }
+
+/* Botões secundários com fundo escuro para contraste sobre o vitral */
+.botao-secundario, .acoes-topo a {
+  background: rgba(11, 16, 32, 0.66);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+}
+.botao-secundario:hover, .acoes-topo a:hover { background: rgba(11, 16, 32, 0.8); }
+.botao-secundario[aria-pressed="true"] { background: rgba(11, 16, 32, 0.8); }
+.data-hoje { text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.7); }
+
+/* Formato de pílula nos botões, abas e links de ação em todas as telas */
+.botao-primario, .botao-secundario, .acoes-topo a, .aba, .botao-voltar, .barra-inferior a {
+  border-radius: 999px;
+}
+.botao-secundario, .acoes-topo a {
+  background: rgba(11, 16, 32, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.abas { border-radius: 999px; }
+.aba { border-radius: 999px; }
+.barra-inferior a { border-radius: 999px; }
+
+/* Contraste atrás dos textos da tela inicial: faixa escura suave */
+.cabecalho, .data-hoje, .pergunta, .subtitulo.centro {
+  background: rgba(11, 16, 32, 0.5);
+  border-radius: 18px;
+  padding: 10px 16px;
+  backdrop-filter: blur(4px);
+}
+.cabecalho { padding: 16px; }
+.pergunta, .data-hoje, .subtitulo.centro { display: block; }
+
+/* Pílulas com borda dourada suave e brilho */
+.botao-secundario, .acoes-topo a, .aba, .botao-voltar, .barra-inferior a {
+  border: 1px solid rgba(250, 204, 21, 0.7);
+  box-shadow: 0 0 12px rgba(250, 204, 21, 0.25);
+}
+.botao-secundario:hover, .acoes-topo a:hover, .aba:hover, .botao-voltar:hover {
+  box-shadow: 0 0 16px rgba(250, 204, 21, 0.45);
+}
+
+/* Cartões de humor com a mesma borda dourada e brilho das pílulas */
+.cartao-humor {
+  border: 1px solid rgba(250, 204, 21, 0.7);
+  box-shadow: 0 0 12px rgba(250, 204, 21, 0.25);
+}
+.cartao-humor:hover, .cartao-humor:focus-visible {
+  box-shadow: 0 0 16px rgba(250, 204, 21, 0.45);
+}
+
+/* Barra inferior flutuante (opção 1): cápsula escura, círculo dourado no item ativo */
+.barra-inferior {
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  height: auto;
+  padding: 8px;
+  padding-bottom: 8px;
+  border-radius: 28px;
+  background: rgba(11, 16, 32, 0.92);
+  justify-content: space-around;
+  transform: none;
+}
+.barra-inferior.oculta { transform: translateY(calc(100% + 24px)); }
+.barra-inferior a {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  padding: 6px 10px;
+  min-width: 64px;
+  gap: 4px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  text-shadow: none;
+  border-radius: 999px;
+}
+.barra-inferior a .icone { width: 22px; height: 22px; }
+.barra-inferior a.ativo {
+  background: rgba(250, 204, 21, 0.16);
+  color: #facc15;
+  font-weight: 600;
+}
+.barra-inferior a.ativo .icone { color: #facc15; }
+.barra-inferior a:not(.ativo) .icone { opacity: 0.85; }
+
+/* Opção 3: barra inferior com o botão Início saliente no centro */
+.barra-central {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: auto;
+  padding: 10px 8px calc(10px + env(safe-area-inset-bottom));
+  border-radius: 24px 24px 0 0;
+  background: rgba(11, 16, 32, 0.95);
+  justify-content: space-around;
+  align-items: flex-end;
+}
+.barra-central.oculta { transform: translateY(100%); }
+.barra-central a {
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 6px 2px;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  border-radius: 14px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.75);
+  text-shadow: none;
+}
+.barra-central a .icone { width: 22px; height: 22px; }
+.barra-central a.ativo { color: #facc15; }
+.barra-central a.central {
+  flex: 1;
+  height: auto;
+  padding: 8px 6px;
+  margin-top: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(250, 204, 21, 0.28), rgba(249, 115, 22, 0.28));
+  color: #facc15;
+  box-shadow: 0 0 14px rgba(250, 204, 21, 0.4);
+}
+.barra-central a.central.ativo { color: #facc15; }
+
+/* Borda dourada com brilho em todos os cartões do app */
+.cartao-tema, .cartao-vazio, .cartao-diario, .cartao-versiculo, .cartao-dia, .item-favorito,
+.caracteristicas, .backup, .grafico, .resumo-evolucao > div, .campo-nota {
+  border: 1px solid rgba(250, 204, 21, 0.7);
+  box-shadow: 0 0 12px rgba(250, 204, 21, 0.25);
+}
+.cartao-tema:hover, .cartao-tema:focus-visible, .cartao-dia:hover {
+  box-shadow: 0 0 16px rgba(250, 204, 21, 0.45);
+}
