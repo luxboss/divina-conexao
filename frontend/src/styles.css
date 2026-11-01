@@ -605,3 +605,6 @@ html, body { overflow-x: hidden; max-width: 100%; }
 /* Só rolagem de cima para baixo: o dedo não arrasta a tela para os lados */
 html, body, #root { touch-action: pan-y; overscroll-behavior-x: none; overscroll-behavior-y: auto; }
 body { overflow-x: hidden; }
+
+/* Largura padrão do conteúdo (no computador e no celular): restaura o limite que a regra de rolagem tinha removido */
+.conteudo { max-width: 560px; width: 100%; margin: 0 auto; }
