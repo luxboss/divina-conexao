@@ -24,8 +24,9 @@ describe("chaveDoDia", () => {
 
 describe("versiculoDoDia", () => {
   it("retorna o mesmo versículo para a mesma data", () => {
-    const a = versiculoDoDia(banco, new Date(2026, 9, 31));
-    const b = versiculoDoDia(banco, new Date(2026, 9, 31, 23, 59));
+    // 12:00 e 20:00 de Brasília do mesmo dia (independe do fuso do computador)
+    const a = versiculoDoDia(banco, new Date("2026-10-31T15:00:00Z"));
+    const b = versiculoDoDia(banco, new Date("2026-10-31T23:00:00Z"));
     expect(a).toEqual(b);
   });
 
