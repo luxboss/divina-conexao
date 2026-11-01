@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { HashRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { HashRouter, Route, Routes, useNavigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import { useSessao } from "./hooks/useSessao";
 import Home from "./pages/Home";
@@ -11,25 +11,33 @@ import Evolucao from "./pages/Evolucao";
 import Favoritos from "./pages/Favoritos";
 import Entrar from "./pages/Entrar";
 
+// Marca que esta abertura do app já foi tratada. Some ao fechar o app ou a aba,
+// então cada vez que o app é aberto (pelo ícone ou pelo link) a tela de entrar aparece.
 const CHAVE_ABERTURA = "divina-conexao:abertura-feita";
 
 /**
- * Ao abrir o app, quem não está logado vai direto para Entrar / Criar conta.
- * Acontece uma vez por abertura, para não prender a pessoa na tela de login.
+ * A cada abertura do app, a pessoa começa na tela de Entrar / Criar conta.
+ * Se já havia uma sessão salva no aparelho, ela é encerrada, para exigir o login de novo.
+ * O link de recuperação de senha é exceção: nele a sessão precisa ser mantida para trocar a senha.
  */
 function IrParaContaAoAbrir() {
-  const { sessao, carregando } = useSessao();
+  const { sessao, carregando, recuperando, sair } = useSessao();
   const navegar = useNavigate();
-  const { pathname } = useLocation();
 
   useEffect(() => {
     if (carregando) return;
     if (sessionStorage.getItem(CHAVE_ABERTURA)) return;
     sessionStorage.setItem(CHAVE_ABERTURA, "1");
-    if (!sessao && (pathname === "/" || pathname === "")) {
+
+    const veioDeRecuperacao = recuperando || window.location.hash.includes("type=recovery");
+    if (veioDeRecuperacao) {
       navegar("/entrar", { replace: true });
+      return;
     }
-  }, [carregando, sessao, pathname, navegar]);
+
+    if (sessao) void sair();
+    navegar("/entrar", { replace: true });
+  }, [carregando, sessao, recuperando, sair, navegar]);
 
   return null;
 }
