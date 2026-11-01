@@ -1,5 +1,5 @@
 /** Ícones em SVG (sem emoji), com a cor do texto. */
-export type NomeIcone = "coracao" | "estrela" | "casa" | "livro" | "grafico" | "grade" | "cruz" | "broto" | "calice" | "janela";
+export type NomeIcone = "coracao" | "estrela" | "casa" | "livro" | "grafico" | "grade" | "cruz" | "broto" | "calice" | "janela" | "nota";
 
 export default function Icone({ nome, cheio = false }: { nome: NomeIcone; cheio?: boolean }) {
   const preenchimento = cheio ? "currentColor" : "none";
@@ -56,6 +56,15 @@ export default function Icone({ nome, cheio = false }: { nome: NomeIcone; cheio?
       <svg {...comum}>
         <path d="M2.5 5.5c3.2-1.2 6.4-1 9.5 1.3 3.1-2.3 6.3-2.5 9.5-1.3V19c-3.2-1.2-6.4-1-9.5 1.3-3.1-2.3-6.3-2.5-9.5-1.3z" fill={preenchimento} {...traco} />
         <path d="M12 6.8V20.3" fill="none" {...traco} />
+      </svg>
+    );
+  }
+  if (nome === "nota") {
+    return (
+      <svg {...comum}>
+        <path d="M9 18V5l11-2v13" fill="none" {...traco} />
+        <circle cx="6" cy="18" r="3" fill={preenchimento} {...traco} />
+        <circle cx="17" cy="16" r="3" fill={preenchimento} {...traco} />
       </svg>
     );
   }

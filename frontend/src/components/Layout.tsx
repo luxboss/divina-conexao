@@ -8,7 +8,7 @@ const ITENS = [
   { para: "/diario", rotulo: "Diário", icone: "livro" as const, central: false, ativo: (p: string) => p.startsWith("/diario") },
   { para: "/evolucao", rotulo: "Evolução", icone: "broto" as const, central: false, ativo: (p: string) => p.startsWith("/evolucao") },
   { para: "/", rotulo: "Início", icone: "cruz" as const, central: true, ativo: (p: string) => p === "/" || p.startsWith("/humor") || p.startsWith("/tema") },
-  { para: "/favoritos", rotulo: "Favoritos", icone: "calice" as const, central: false, ativo: (p: string) => p.startsWith("/favoritos") },
+  { para: "/musicas", rotulo: "Músicas", icone: "nota" as const, central: false, ativo: (p: string) => p.startsWith("/musicas") },
   { para: "/temas", rotulo: "Temas", icone: "janela" as const, central: false, ativo: (p: string) => p === "/temas" }
 ];
 
