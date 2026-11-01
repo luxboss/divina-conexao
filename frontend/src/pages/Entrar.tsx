@@ -241,10 +241,9 @@ export default function Entrar() {
         loading="eager"
         decoding="async"
       />
-      <p className="marca-desktop" aria-hidden="true">Divina Conexão</p>
       <header className="cabecalho">
-        <h1>{modo === "entrar" ? "Entrar" : "Criar conta"}</h1>
-        <p className="subtitulo">Seu diário e favoritos ficam guardados na sua conta</p>
+        <h1>Divina Conexão</h1>
+        <p className="subtitulo">Seu companheiro espiritual diário</p>
       </header>
 
       <div className="abas abas-duas" role="tablist" aria-label="Conta">
