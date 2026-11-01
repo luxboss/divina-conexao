@@ -15,6 +15,11 @@ const ITENS = [
 export default function Layout({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
   const [barraVisivel, setBarraVisivel] = useState(true);
+
+  // Ao trocar de aba, a página começa sempre no topo (e não na posição de rolagem anterior).
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname]);
   const { sessao, carregando } = useSessao();
   // A barra só aparece para quem já entrou na conta.
   const mostrarBarra = !carregando && !!sessao;
