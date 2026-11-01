@@ -171,8 +171,6 @@ export default function Entrar() {
           {enviando ? "Aguarde…" : modo === "entrar" ? "Entrar" : "Criar conta"}
         </button>
       </form>
-
-      <Link to="/" className="botao-secundario largo">Voltar ao início</Link>
     </section>
   );
 }
