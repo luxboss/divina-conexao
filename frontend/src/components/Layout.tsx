@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { decidirVisibilidade } from "../lib/rolagem";
 import { Link, useLocation } from "react-router-dom";
 import Icone from "./Icone";
+import { useSessao } from "../hooks/useSessao";
 
 const ITENS = [
   { para: "/diario", rotulo: "Diário", icone: "livro" as const, central: false, ativo: (p: string) => p.startsWith("/diario") },
@@ -14,6 +15,9 @@ const ITENS = [
 export default function Layout({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
   const [barraVisivel, setBarraVisivel] = useState(true);
+  const { sessao, carregando } = useSessao();
+  // A barra só aparece para quem já entrou na conta.
+  const mostrarBarra = !carregando && !!sessao;
 
   useEffect(() => {
     let anterior = window.scrollY;
@@ -37,6 +41,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <main className="conteudo">
         {children}
       </main>
+      {mostrarBarra && (
       <nav className={barraVisivel ? "barra-inferior barra-central" : "barra-inferior barra-central oculta"} aria-label="Navegação principal">
         {ITENS.map((item) => {
           const ativo = item.ativo(pathname);
@@ -54,6 +59,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           );
         })}
       </nav>
+      )}
     </div>
   );
 }
