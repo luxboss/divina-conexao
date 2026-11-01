@@ -54,7 +54,6 @@ export default function Humor() {
   return (
     <section className="pagina">
       <div className="topo">
-        <Link to="/" className="botao-voltar" aria-label="Voltar">←</Link>
         <h1 className="titulo-tema">Você está {rotuloDoHumor(id).toLowerCase()}</h1>
       </div>
 

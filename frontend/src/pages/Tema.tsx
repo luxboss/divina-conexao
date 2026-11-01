@@ -45,7 +45,6 @@ export default function Tema() {
   return (
     <section className="pagina">
       <div className="topo">
-        <Link to="/" className="botao-voltar" aria-label="Voltar">←</Link>
         <h1 className="titulo-tema">{tema.tema}</h1>
       </div>
 

@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { decidirVisibilidade } from "../lib/rolagem";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Icone from "./Icone";
 import { useSessao } from "../hooks/useSessao";
 
@@ -14,6 +14,12 @@ const ITENS = [
 
 export default function Layout({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
+  const navegar = useNavigate();
+  const mostrarVoltar = pathname !== "/entrar";
+  function voltar() {
+    if (window.history.length > 1) navegar(-1);
+    else navegar("/");
+  }
   const [barraVisivel, setBarraVisivel] = useState(true);
 
   // Ao trocar de aba, a página começa sempre no topo (e não na posição de rolagem anterior).
@@ -43,6 +49,9 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   return (
     <div className="app">
+      {mostrarVoltar && (
+        <button type="button" className="botao-voltar-topo" aria-label="Voltar" onClick={voltar}>←</button>
+      )}
       <main className="conteudo">
         {children}
       </main>
