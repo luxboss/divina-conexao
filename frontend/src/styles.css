@@ -619,3 +619,6 @@ body { overflow-x: hidden; }
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
 }
 .linha-aparelho .botao-secundario { flex-shrink: 0; }
+
+/* Título do cabeçalho menor no celular, para caber em uma linha */
+.cabecalho h1 { font-size: clamp(28px, 7vw, 64px); white-space: nowrap; }
