@@ -247,7 +247,7 @@ export default function Entrar() {
         <p className="subtitulo">Seu diário e favoritos ficam guardados na sua conta</p>
       </header>
 
-      <div className="abas" role="tablist" aria-label="Conta">
+      <div className="abas abas-duas" role="tablist" aria-label="Conta">
         <button type="button" role="tab" aria-selected={modo === "entrar"} className={modo === "entrar" ? "aba ativa" : "aba"} onClick={() => setModo("entrar")}>
           Entrar
         </button>
