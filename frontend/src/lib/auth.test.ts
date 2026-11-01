@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { validarCadastro, validarEmail, MINIMO_SENHA } from "./auth";
+import { validarCadastro, validarEmail, validarNovaSenha, MINIMO_SENHA } from "./auth";
 
 describe("validarEmail", () => {
   it("aceita e-mail comum", () => {
@@ -22,5 +22,17 @@ describe("validarCadastro", () => {
   });
   it("aponta e-mail inválido", () => {
     expect(validarCadastro({ email: "x", senha: "senha1234" })).toContain("Informe um e-mail válido.");
+  });
+});
+
+describe("validarNovaSenha", () => {
+  it("aceita senha com tamanho mínimo e confirmação igual", () => {
+    expect(validarNovaSenha("senha1234", "senha1234")).toEqual([]);
+  });
+  it("recusa senha curta", () => {
+    expect(validarNovaSenha("123", "123")).toContain(`A senha precisa ter pelo menos ${MINIMO_SENHA} caracteres.`);
+  });
+  it("recusa confirmação diferente", () => {
+    expect(validarNovaSenha("senha1234", "senha1235")).toContain("As duas senhas não são iguais.");
   });
 });

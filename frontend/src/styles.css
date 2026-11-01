@@ -539,3 +539,21 @@ h1, h2, .titulo-tema, .cabecalho h1 {
 .campo-texto:focus-visible { outline: 2px solid #facc15; outline-offset: 2px; }
 .acoes-topo { grid-template-columns: 1fr 1fr; }
 .acoes-topo > a:last-child { grid-column: 1 / -1; }
+
+/* Campo de senha com botão de olho */
+.campo-senha { display: flex; flex-direction: column; gap: 6px; }
+.campo-senha-linha { position: relative; display: flex; align-items: center; }
+.campo-senha-linha .campo-texto { padding-right: 52px; }
+.botao-olho {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px; display: grid; place-items: center;
+  background: rgba(11, 16, 32, 0.7); color: #facc15;
+  border: 1px solid rgba(250, 204, 21, 0.6); border-radius: 999px; cursor: pointer;
+}
+.botao-olho[aria-pressed="true"] { background: rgba(250, 204, 21, 0.18); }
+.botao-olho:focus-visible { outline: 2px solid #facc15; outline-offset: 2px; }
+.link-acao {
+  background: none; border: 0; color: #facc15; text-decoration: underline;
+  font: inherit; font-size: 15px; cursor: pointer; padding: 6px; align-self: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
