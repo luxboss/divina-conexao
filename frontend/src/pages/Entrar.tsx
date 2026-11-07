@@ -261,7 +261,7 @@ export default function Entrar() {
         decoding="async"
       />
       <header className="cabecalho">
-        <h1>Divina Conexão</h1>
+        <h1>ALTAR DIÁRIO</h1>
         <p className="subtitulo">Seu companheiro espiritual diário</p>
       </header>
 

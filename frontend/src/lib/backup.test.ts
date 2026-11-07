@@ -17,7 +17,7 @@ describe("exportarBackup", () => {
   });
 
   it("tem um nome de arquivo com a data", () => {
-    expect(NOME_ARQUIVO_BACKUP(new Date(2026, 9, 31))).toBe("divina-conexao-backup-2026-10-31.json");
+    expect(NOME_ARQUIVO_BACKUP(new Date(2026, 9, 31))).toBe("altar-diario-backup-2026-10-31.json");
   });
 });
 

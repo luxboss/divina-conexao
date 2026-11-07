@@ -2,7 +2,7 @@ import type { VersiculoValido } from "./versiculos";
 
 /** Texto pronto para colar ou enviar: citação, referência e assinatura do app. */
 export function textoDoVersiculo(v: VersiculoValido): string {
-  return `“${v.texto}” — ${v.referencia}\n\nDivina Conexão`;
+  return `“${v.texto}” — ${v.referencia}\n\nALTAR DIÁRIO`;
 }
 
 /** Link que abre o WhatsApp com o texto já preenchido. */

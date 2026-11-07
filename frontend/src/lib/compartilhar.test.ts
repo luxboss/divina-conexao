@@ -4,7 +4,7 @@ import { linkWhatsApp, quebrarLinhas, textoDoVersiculo } from "./compartilhar";
 describe("textoDoVersiculo", () => {
   it("monta o texto com referência e assinatura do app", () => {
     expect(textoDoVersiculo({ referencia: "João 14:27", texto: "A paz eu vos deixo." }))
-      .toBe("“A paz eu vos deixo.” — João 14:27\n\nDivina Conexão");
+      .toBe("“A paz eu vos deixo.” — João 14:27\n\nALTAR DIÁRIO");
   });
 });
 

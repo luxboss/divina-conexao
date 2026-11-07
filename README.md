@@ -1,4 +1,4 @@
-# Divina Conexão
+# Altar Diário
 
 Escolha um tema e receba um versículo bíblico para o seu dia. App web (PWA), sem servidor, sem API e sem IA.
 

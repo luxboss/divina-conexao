@@ -12,8 +12,8 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: ["icons/icon.svg", "icons/apple-touch-icon.png"],
       manifest: {
-        name: "Divina Conexão",
-        short_name: "Divina Conexão",
+        name: "ALTAR DIÁRIO",
+        short_name: "ALTAR DIÁRIO",
         description: "Escolha um tema e receba um versículo bíblico.",
         lang: "pt-BR",
         start_url: "./",

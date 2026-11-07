@@ -6,12 +6,12 @@ interface EventoInstalar extends Event {
 }
 
 /**
- * Banner "Instale Divina Conexão". Usa o convite nativo quando o navegador oferece;
+ * Banner "Instale Altar Diário". Usa o convite nativo quando o navegador oferece;
  * caso contrário mostra como instalar pelo menu do navegador.
  */
 export default function InstalarApp() {
   const [convite, setConvite] = useState<EventoInstalar | null>(null);
-  const [fechado, setFechado] = useState(() => localStorage.getItem("divina-conexao:banner-instalar") === "fechado");
+  const [fechado, setFechado] = useState(() => localStorage.getItem("altar-diario:banner-instalar") === "fechado" || localStorage.getItem("divina-conexao:banner-instalar") === "fechado");
   const [instalado, setInstalado] = useState(false);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function InstalarApp() {
   return (
     <aside className="banner-instalar" aria-label="Instalar o aplicativo">
       <div className="banner-texto">
-        <strong>Instale Divina Conexão</strong>
+        <strong>Instale ALTAR DIÁRIO</strong>
         <span>Acesso rápido na sua tela inicial e funciona sem internet.</span>
         {!convite && (
           <span className="dica">No menu do navegador, escolha "Adicionar à tela inicial".</span>

@@ -27,7 +27,7 @@ export default function Home() {
 
       <header className="cabecalho">
         <div className="logo"><Icone nome="coracao" cheio /></div>
-        <h1>Divina Conexão</h1>
+        <h1>ALTAR DIÁRIO</h1>
         <p className="subtitulo">Seu companheiro espiritual diário</p>
       </header>
 

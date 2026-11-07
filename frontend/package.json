@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Divina Conexão: escolha um tema e receba um versículo bíblico.",
+  "description": "Altar Diário: escolha um tema e receba um versículo bíblico.",
   "scripts": {
     "sync-dados": "node scripts/sincronizar-dados.mjs",
     "dev": "npm run sync-dados && vite",
